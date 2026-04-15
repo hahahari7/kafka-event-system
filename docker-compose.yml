@@ -20,3 +20,15 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+
+  order-service:
+    build: ./order-service
+    ports:
+      - "5001:5001"
+    depends_on:
+      - kafka
+
+  notification-service:
+    build: ./notification-service
+    depends_on:
+      - kafka
